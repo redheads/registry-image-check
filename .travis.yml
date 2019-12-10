@@ -1,0 +1,42 @@
+language: python
+python:
+- '2.7'
+
+os: linux
+
+install:
+- sudo apt-get install -y upx
+- pip install pyinstaller
+
+script:
+- python -OO -m PyInstaller --strip --onefile docker-image-check.py
+- mv dist/docker-image-check .
+
+deploy:
+  - provider: releases
+    api_key:
+      secure: b/RQzQ5HviFwZA7MXjKBTFiu0DtsVr+VZ7yOYOPNRWsyyCn5ZzwE/Gy02EBgchxuAFVApxyTqXp0dJVSoYe5bnLZVbUNvZaJH79HDwm/fIPCWUDGi64wVQZ3Zd4BgewdKzcFyWpWXNkUdcX488Y4aEi0Q6jYDOa/4eee6xqqiRVqZkRv9XoSOmZ960nDKjCIa4w/usjpcTSJbctPkM+JvL3BvB3E4i4kXwvjqax4fbW8/bT6vijMeaxQ5nwACGqwFNduy2D6jjoM8CDwbeEahFrFUcTiP3uynMBbfibQOHrinB1XhTMw1ZrsZUMFyxMjXEc2udfSVVQeWBbJ+55B6myIRzLuXHiMtF2sF7+yEgy4KATnYxsg4jc/a4kLDXUO4omDCLHdGs0FHpTTjLYmtax7OK3AAGueChIpoMc7LI54Bg7xW8krWTsV2tO1S7jPEwoO0Z7ABj3AbLaIi4jyG55AqhcqBXk9TH4Gs8OBmDZNKfb3ZFnvyxlnQiKFCVfgblbUSlwZUcsIpsz6Fhn6SWSrwQNBhLXJ0E3OuSARXACCXGkX5vxKqFDc7K0Y62a4OspL7tV7HOjp0vE7Yk1+PLvhvNujVevvtxzpwMlREJsx3GxI3jI9VZIc98RHjFx4/erja5DvZ+MMs/q2a7k+IfXj0qwBGtcnNV7KdJvjNqU=
+    file_glob: true
+    file: /*.py
+    on:
+      repo: cmorty/docker-image-check
+      tags: true
+
+  - provider: releases
+    api_key:
+      secure: b/RQzQ5HviFwZA7MXjKBTFiu0DtsVr+VZ7yOYOPNRWsyyCn5ZzwE/Gy02EBgchxuAFVApxyTqXp0dJVSoYe5bnLZVbUNvZaJH79HDwm/fIPCWUDGi64wVQZ3Zd4BgewdKzcFyWpWXNkUdcX488Y4aEi0Q6jYDOa/4eee6xqqiRVqZkRv9XoSOmZ960nDKjCIa4w/usjpcTSJbctPkM+JvL3BvB3E4i4kXwvjqax4fbW8/bT6vijMeaxQ5nwACGqwFNduy2D6jjoM8CDwbeEahFrFUcTiP3uynMBbfibQOHrinB1XhTMw1ZrsZUMFyxMjXEc2udfSVVQeWBbJ+55B6myIRzLuXHiMtF2sF7+yEgy4KATnYxsg4jc/a4kLDXUO4omDCLHdGs0FHpTTjLYmtax7OK3AAGueChIpoMc7LI54Bg7xW8krWTsV2tO1S7jPEwoO0Z7ABj3AbLaIi4jyG55AqhcqBXk9TH4Gs8OBmDZNKfb3ZFnvyxlnQiKFCVfgblbUSlwZUcsIpsz6Fhn6SWSrwQNBhLXJ0E3OuSARXACCXGkX5vxKqFDc7K0Y62a4OspL7tV7HOjp0vE7Yk1+PLvhvNujVevvtxzpwMlREJsx3GxI3jI9VZIc98RHjFx4/erja5DvZ+MMs/q2a7k+IfXj0qwBGtcnNV7KdJvjNqU=
+    file: docker-image-check
+    skip_cleanup: true
+    on:
+      repo: cmorty/docker-image-check
+      tags: true
+
+  - provider: releases
+    api_key:
+      secure: b/RQzQ5HviFwZA7MXjKBTFiu0DtsVr+VZ7yOYOPNRWsyyCn5ZzwE/Gy02EBgchxuAFVApxyTqXp0dJVSoYe5bnLZVbUNvZaJH79HDwm/fIPCWUDGi64wVQZ3Zd4BgewdKzcFyWpWXNkUdcX488Y4aEi0Q6jYDOa/4eee6xqqiRVqZkRv9XoSOmZ960nDKjCIa4w/usjpcTSJbctPkM+JvL3BvB3E4i4kXwvjqax4fbW8/bT6vijMeaxQ5nwACGqwFNduy2D6jjoM8CDwbeEahFrFUcTiP3uynMBbfibQOHrinB1XhTMw1ZrsZUMFyxMjXEc2udfSVVQeWBbJ+55B6myIRzLuXHiMtF2sF7+yEgy4KATnYxsg4jc/a4kLDXUO4omDCLHdGs0FHpTTjLYmtax7OK3AAGueChIpoMc7LI54Bg7xW8krWTsV2tO1S7jPEwoO0Z7ABj3AbLaIi4jyG55AqhcqBXk9TH4Gs8OBmDZNKfb3ZFnvyxlnQiKFCVfgblbUSlwZUcsIpsz6Fhn6SWSrwQNBhLXJ0E3OuSARXACCXGkX5vxKqFDc7K0Y62a4OspL7tV7HOjp0vE7Yk1+PLvhvNujVevvtxzpwMlREJsx3GxI3jI9VZIc98RHjFx4/erja5DvZ+MMs/q2a7k+IfXj0qwBGtcnNV7KdJvjNqU=
+    file: docker-image-check
+    skip_cleanup: true
+    draft: true
+    on:
+      repo: cmorty/docker-image-check
+      tags: false
