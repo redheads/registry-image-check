@@ -1,0 +1,13 @@
+build:
+  image: python:2.7
+  tags:
+    - linux
+  script:
+    - apt-get update
+    - apt-get install -y upx
+    - pip install pyinstaller
+    - python -OO -m PyInstaller --strip --onefile docker-image-check.py
+    - mv dist/docker-image-check .
+  artifacts:
+     paths:
+      - docker-image-check
