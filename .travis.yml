@@ -9,8 +9,8 @@ install:
 - pip install pyinstaller
 
 script:
-- python -OO -m PyInstaller --strip --onefile docker-image-check.py
-- mv dist/docker-image-check .
+- python -OO -m PyInstaller --strip --onefile registry-image-check.py
+- mv dist/registry-image-check .
 
 deploy:
   - provider: releases

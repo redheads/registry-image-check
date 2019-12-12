@@ -5,7 +5,7 @@ It is based on the script provided by [Harbor][1]
 
 ## Usage
 
-`./docker-img-check.py <registry/image:tag> <username> <password>`
+`./registry-image-check.py <registry/image:tag> <username> <password>`
 
 The `tag` is optional.
 If no `tag` is given all tags are listed.

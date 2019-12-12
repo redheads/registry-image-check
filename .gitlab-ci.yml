@@ -6,8 +6,8 @@ build:
     - apt-get update
     - apt-get install -y upx
     - pip install pyinstaller
-    - python -OO -m PyInstaller --strip --onefile docker-image-check.py
-    - mv dist/docker-image-check .
+    - python -OO -m PyInstaller --strip --onefile registry-image-check.py
+    - mv dist/registry-image-check .
   artifacts:
      paths:
-      - docker-image-check
+      - registry-image-check
