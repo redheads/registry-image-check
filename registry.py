@@ -22,7 +22,7 @@ class RegistryApi(object):
         self.password = password
         self.basic_token = base64.encodestring("%s:%s" % (str(username), str(password)))[0:-1]
         self.registry_endpoint = registry_endpoint.rstrip('/')
-        print("%s/v2/_catalog" % (self.registry_endpoint,))
+        #print("%s/v2/_catalog" % (self.registry_endpoint,))
         auth = self.pingRegistry("%s/v2/_catalog" % (self.registry_endpoint,))
         if auth is None:
             raise RegistryException("get token realm and service failed")
