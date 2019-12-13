@@ -87,6 +87,8 @@ def main():
     registry = RegistryApi(options.username, options.password, "https://" + registryimage[0] + '/')
     tags = registry.getTagList(registryimage[1])
 
+    if(tags is None):
+        exit(2)
     print(json.dumps(tags))
 
 
