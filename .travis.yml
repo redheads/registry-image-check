@@ -7,17 +7,21 @@ os: linux
 install:
 - sudo apt-get install -y upx
 - pip install pyinstaller
+- sudo apt-get install -y liblzma-dev patchelf
+- pip install backports.lzma
+- pip install staticx
 
 script:
 - python -OO -m PyInstaller --strip --onefile registry-image-check.py
+- python -m staticx --strip  dist/registry-image-check ./registry-image-check.static
 - mv dist/registry-image-check .
 
 deploy:
   - provider: releases
     api_key:
       secure: mZHmkTKkrFri9N2s/6+R7nmQxpjsSc5wHZhsOevlKF7HdvU5m+4puu0FMWbRspmhBKx09/FcKC4/ksSCVIDJjq/G/GfP4Ak/tmblyPOI61fiQfMdSQoqT7NpcK+sjf9qd/dYczo+7TrESbRvQz+Ejj1l04aS6+bha/CwJpB6vbrwjraZUElmP2PVI2sfrJnFIOMb4kWGyiukt7pRiRomAQ+MntnAnsrBLAKkMa1tIwD1SZC8JijMLozIVt3f8ywwQHtqBtbvmeLkDr0LvDxwQOqTUd1WlVHY0HXfCHyf59t0Zm/HibqO4yf0Zt74u8vqbkeEKbB4oPzlQjWIt8O1U1ya1uII9ZEpwZNSFuZWQo4aIKlsij67Lt2ugbDxvRC/z0ISBmw+EFKkroALouup/V+/b3zz0GgUPwmpMzqzl2DKfyBN6jZM5z7nM3lvWJ2OmRF3jL62gierWB7o9EhIYNcXF/OQJkuwhNXBi40dZkhyJuPyyrdaSi91aGF5x7VTRsxGQlJiRW8au2gA/iwfUy6fB8f7Wej5VHN8zk3dL3CxCAj3tSY2fVhICTkKpMeGZ6DlktxBIkPEPAmj7u+YlvArMQ3d+9zR63hO1uEKaMM6s+igjoXb9d8HL9mPleaw8vAp6QnPwfqEqOtyzjolwwF4aiTLSLAihc7zMny6z28=
-    file_glob: true
-    file: /*.py
+    file: registry-image-check.static
+    skip_cleanup: true
     on:
       repo: redheads/registry-image-check
       tags: true
@@ -35,6 +39,16 @@ deploy:
     api_key:
       secure: mZHmkTKkrFri9N2s/6+R7nmQxpjsSc5wHZhsOevlKF7HdvU5m+4puu0FMWbRspmhBKx09/FcKC4/ksSCVIDJjq/G/GfP4Ak/tmblyPOI61fiQfMdSQoqT7NpcK+sjf9qd/dYczo+7TrESbRvQz+Ejj1l04aS6+bha/CwJpB6vbrwjraZUElmP2PVI2sfrJnFIOMb4kWGyiukt7pRiRomAQ+MntnAnsrBLAKkMa1tIwD1SZC8JijMLozIVt3f8ywwQHtqBtbvmeLkDr0LvDxwQOqTUd1WlVHY0HXfCHyf59t0Zm/HibqO4yf0Zt74u8vqbkeEKbB4oPzlQjWIt8O1U1ya1uII9ZEpwZNSFuZWQo4aIKlsij67Lt2ugbDxvRC/z0ISBmw+EFKkroALouup/V+/b3zz0GgUPwmpMzqzl2DKfyBN6jZM5z7nM3lvWJ2OmRF3jL62gierWB7o9EhIYNcXF/OQJkuwhNXBi40dZkhyJuPyyrdaSi91aGF5x7VTRsxGQlJiRW8au2gA/iwfUy6fB8f7Wej5VHN8zk3dL3CxCAj3tSY2fVhICTkKpMeGZ6DlktxBIkPEPAmj7u+YlvArMQ3d+9zR63hO1uEKaMM6s+igjoXb9d8HL9mPleaw8vAp6QnPwfqEqOtyzjolwwF4aiTLSLAihc7zMny6z28=
     file: registry-image-check
+    skip_cleanup: true
+    draft: true
+    on:
+      repo: redheads/registry-image-check
+      tags: false
+
+  - provider: releases
+    api_key:
+      secure: mZHmkTKkrFri9N2s/6+R7nmQxpjsSc5wHZhsOevlKF7HdvU5m+4puu0FMWbRspmhBKx09/FcKC4/ksSCVIDJjq/G/GfP4Ak/tmblyPOI61fiQfMdSQoqT7NpcK+sjf9qd/dYczo+7TrESbRvQz+Ejj1l04aS6+bha/CwJpB6vbrwjraZUElmP2PVI2sfrJnFIOMb4kWGyiukt7pRiRomAQ+MntnAnsrBLAKkMa1tIwD1SZC8JijMLozIVt3f8ywwQHtqBtbvmeLkDr0LvDxwQOqTUd1WlVHY0HXfCHyf59t0Zm/HibqO4yf0Zt74u8vqbkeEKbB4oPzlQjWIt8O1U1ya1uII9ZEpwZNSFuZWQo4aIKlsij67Lt2ugbDxvRC/z0ISBmw+EFKkroALouup/V+/b3zz0GgUPwmpMzqzl2DKfyBN6jZM5z7nM3lvWJ2OmRF3jL62gierWB7o9EhIYNcXF/OQJkuwhNXBi40dZkhyJuPyyrdaSi91aGF5x7VTRsxGQlJiRW8au2gA/iwfUy6fB8f7Wej5VHN8zk3dL3CxCAj3tSY2fVhICTkKpMeGZ6DlktxBIkPEPAmj7u+YlvArMQ3d+9zR63hO1uEKaMM6s+igjoXb9d8HL9mPleaw8vAp6QnPwfqEqOtyzjolwwF4aiTLSLAihc7zMny6z28=
+    file: registry-image-check.static
     skip_cleanup: true
     draft: true
     on:
