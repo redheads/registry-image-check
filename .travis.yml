@@ -4,10 +4,15 @@ python:
 
 os: linux
 
+addons:
+  apt:
+    packages:
+      - upx
+      - liblzma-dev
+      - patchelf
+
 install:
-- sudo apt-get install -y upx
 - pip install -Iv pyinstaller==3.5
-- sudo apt-get install -y liblzma-dev patchelf
 - pip install -Iv backports.lzma==0.0.14
 - pip install -Iv staticx==0.8.1
 
