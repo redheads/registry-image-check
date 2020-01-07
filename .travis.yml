@@ -18,7 +18,7 @@ install:
 
 script:
 - python -OO -m PyInstaller --strip --onefile registry-image-check.py
-- python -m staticx --strip  dist/registry-image-check ./registry-image-check.static
+- python -m staticx --loglevel DEBUG --strip dist/registry-image-check ./registry-image-check.static
 - mv dist/registry-image-check .
 
 deploy:
