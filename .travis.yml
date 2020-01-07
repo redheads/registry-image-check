@@ -6,10 +6,10 @@ os: linux
 
 install:
 - sudo apt-get install -y upx
-- pip install pyinstaller
+- pip install -Iv pyinstaller==3.5
 - sudo apt-get install -y liblzma-dev patchelf
-- pip install backports.lzma
-- pip install staticx
+- pip install -Iv backports.lzma==0.0.14
+- pip install -Iv staticx==0.8.1
 
 script:
 - python -OO -m PyInstaller --strip --onefile registry-image-check.py
