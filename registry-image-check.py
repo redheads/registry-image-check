@@ -25,7 +25,7 @@ def main():
     tags = registry.getTagList(registryimage[1])
 
     if(tags is None):
-        exit(2)
+        sys.exit(2)
     print(json.dumps(tags))
 
 
