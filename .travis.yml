@@ -12,9 +12,9 @@ addons:
       - patchelf
 
 install:
-- pip install -Iv pyinstaller==3.5
+- pip install -Iv pyinstaller==3.6
 - pip install -Iv backports.lzma==0.0.14
-- pip install -Iv staticx==0.8.1
+- pip install -Iv staticx==0.9.1
 
 script:
 - python -OO -m PyInstaller --strip --onefile registry-image-check.py
